@@ -5,7 +5,7 @@ Small C projects exploring topics from COMS 3110 (Design and Analysis of Algorit
 ## Topics
 
 - **Running time analysis & asymptotic notation**
-  - Empirical complexity plotter: time bubble/insertion/merge/quicksort on growing input sizes, export to CSV, compare against theoretical growth rates
+  - Empirical complexity plotter: generic timing harness that takes any compiled binary + an input size, forks/execs it across a range of sizes, records wall-clock time per run to CSV, and plots the growth curve — usable against any of the other projects here, not just sorting
 
 - **Heaps and hashing**
   - Binary min-heap from scratch (array-backed); use it for a task scheduler or k-th smallest element finder
