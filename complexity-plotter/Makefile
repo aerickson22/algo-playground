@@ -12,12 +12,6 @@ PACKAGENAME=complexity_plotter.zip
 
 all:$(BIN)
 
-release: CFLAGS=-Wall -Wextra -O2 -DNDEBUG
-
-release: clean
-
-release: $(BIN)
-
 $(BIN): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(BIN)
 
