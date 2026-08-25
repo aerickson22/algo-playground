@@ -1,4 +1,5 @@
 RM=rm -f
+
 CC=gcc
 CFLAGS=-g -Wall -Wextra
 SRC=src
@@ -8,16 +9,21 @@ OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
 BINDIR=bin
 BIN=$(BINDIR)/min-heap
 PACKAGENAME=min-heap.zip
+
 all:$(BIN)
-release: CFLAGS=-Wall -Wextra -O2 -DNDEBUG
-release: clean
-release: $(BIN)
+
 $(BIN): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o main
+	$(CC) $(CFLAGS) $(OBJS) -o $(BIN)
+
 $(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+run:
+	./$(BIN)
+
 clean:
 	$(RM) -r bin/* $(OBJ)/*
+
 submit:
 	$(RM) $(PACKAGENAME)
 	zip $(PACKAGENAME) $(BIN)
