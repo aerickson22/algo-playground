@@ -22,6 +22,7 @@
 #define HASH_TABLE_H
 
 #include <stdlib.h>
+#include <stdint.h>
 
 /**
  * @brief Opaque hash table type.
@@ -41,10 +42,6 @@ typedef struct hashtable_t hashtable_t;
  *
  * @param key_size   Size, in bytes, of a single key.
  * @param value_size Size, in bytes, of a single value.
- * @param compare    Function that compares two keys (@p k1, @p k2) and
- *                    returns 0 if they are equal, and a non-zero value
- *                    otherwise.
- * @param hash       Function that computes a hash value for a given key.
  *
  * @return Pointer to a newly allocated hashtable_t, or NULL on allocation
  *         failure.
@@ -52,9 +49,7 @@ typedef struct hashtable_t hashtable_t;
  * @note The caller is responsible for eventually calling hashtable_destory()
  *       to free the returned table.
  */
-hashtable_t* hashtable_init(size_t key_size, size_t value_size,
-                             int (*compare)(void* k1, void* k2),
-                             size_t (*hash)(void* key));
+hashtable_t* hashtable_init(size_t key_size, size_t value_size, int(*compare)(void* k1, void* k2));
 
 /**
  * @brief Destroy a hash table and free all associated memory.
@@ -83,8 +78,10 @@ void hashtable_destory(hashtable_t* ht);
  * @param value Pointer to the value to associate with the key. The value
  *              data is copied into the table (value_size bytes).
  * @param ht    Hash table to insert into.
+ *
+ * @return integer signaling OK(0) state or ERROR(-1) state
  */
-void hashtable_put(void* key, void* value, hashtable_t* ht);
+int hashtable_put(void* key, void* value, hashtable_t* ht);
 
 /**
  * @brief Retrieve the value associated with a key.
